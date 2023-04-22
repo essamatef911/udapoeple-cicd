@@ -240,7 +240,7 @@ jobs:
   #     - attach_workspace:
   #         at: ~/
   #     - add_ssh_keys:
-  #         fingerprints: ["0c:89:f6:38:d3:e2:4d:e5:bc:87:bc:e7:a4:9e:e9:ab"]
+  #         fingerprints: ["2d:98:e4:d6:17:58:03:eb:21:e4:21:18:a3:fe:17:b8"]
   #     - run:
   #         name: Install dependencies
   #         command: |
@@ -312,7 +312,7 @@ jobs:
   #   steps:
   #     - checkout
   #     - add_ssh_keys:
-  #         fingerprints: ["0c:89:f6:38:d3:e2:4d:e5:bc:87:bc:e7:a4:9e:e9:ab"]
+  #         fingerprints: ["2d:98:e4:d6:17:58:03:eb:21:e4:21:18:a3:fe:17:b8"]
   #     - run:
   #         name: Deploy backend
   #         command: |
