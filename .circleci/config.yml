@@ -2,7 +2,7 @@ version: 2.1
 
 
 orbs:   #steps for connect slack email and massage 
-  # slack: circleci/slack@4.10.1
+  slack: circleci/slack@4.10.1
 
 
 commands:
@@ -231,25 +231,25 @@ jobs:
   #     - destroy-environment
 
 
-  # configure-infrastructure:  # create configure-infrastructure
-  #   docker:
-  #     - image: python:3.7-alpine3.11
-  #   steps:
-  #     - checkout
-  #     - run: apk add --update tar gzip
-  #     - attach_workspace:
-  #         at: ~/
-  #     - add_ssh_keys:
-  #         fingerprints: ["2d:98:e4:d6:17:58:03:eb:21:e4:21:18:a3:fe:17:b8"]
-  #     - run:
-  #         name: Install dependencies
-  #         command: |
-  #           apk add --update ansible
-  #     - run:
-  #         name: Configure server
-  #         command: |
-  #           ansible-playbook .circleci/ansible/configure-server.yml -i .circleci/ansible/inventory.txt
-  #           cat .circleci/ansible/inventory.txt
+  configure-infrastructure:  # create configure-infrastructure
+    docker:
+      - image: python:3.7-alpine3.11
+    steps:
+      - checkout
+      - run: apk add --update tar gzip
+      - attach_workspace:
+          at: ~/
+      - add_ssh_keys:
+          fingerprints: ["2d:98:e4:d6:17:58:03:eb:21:e4:21:18:a3:fe:17:b8"]
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --update ansible
+      - run:
+          name: Configure server
+          command: |
+            ansible-playbook .circleci/ansible/configure-server.yml -i .circleci/ansible/inventory.txt
+            cat .circleci/ansible/inventory.txt
 
   #     - destroy-environment
 
@@ -428,8 +428,8 @@ jobs:
 workflows:  # create workflows
   default:
     jobs:
-      - build-frontend
-      - build-backend
+      # - build-frontend
+      # - build-backend
       # - test-frontend:
       #    requires: [build-frontend]
       # - test-backend:
@@ -443,14 +443,14 @@ workflows:  # create workflows
       #    - test-frontend
       #    - test-backend
       #    - scan-frontend
-      #    - scan-backend    
+      #    - scan-backend 
 
       # - deploy-infrastructure:
       #     requires: [test-frontend, test-backend, scan-frontend, scan-backend]
       #     filters:
       #       branches:
       #         only: [master]
-      # - configure-infrastructure:
+      - configure-infrastructure
       #     requires: [deploy-infrastructure]
       # - run-migrations:
       #     requires: [configure-infrastructure]
