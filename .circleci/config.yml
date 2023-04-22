@@ -49,28 +49,28 @@ commands:
             unzip awscliv2.zip
             sudo ./aws/install    
 
-#   revert-migrations: #this steps  for create migrations 
-#     description: Revert the last migration
-#     parameters:
-#       Workflow_ID:
-#         type: string
-#         default: ${CIRCLE_WORKFLOW_ID:0:7}
-#     steps:
-#       - run:
-#           name: Revert migrations
-#           when: on_fail
-#           command: |
-#             export SUCCESS=$(curl --insecure  https://kvdb.io/CRbAro9ns95TrR5PYBmunS/migration_<< parameters.Workflow_ID >>)
-#             # Logic for reverting the database state
-#             echo $SUCCESS
-#             if (( $SUCCESS == 1 ));
-#             then
-#               pwd
-#               ls 
-#               cd ~/project/backend
-#               npm install
-#               npm run migrations:revert
-#             fi
+  revert-migrations: #this steps  for create migrations 
+    description: Revert the last migration
+    parameters:
+      Workflow_ID:
+        type: string
+        default: ${CIRCLE_WORKFLOW_ID:0:7}
+    steps:
+      - run:
+          name: Revert migrations
+          when: on_fail
+          command: |
+            export SUCCESS=$(curl --insecure  https://kvdb.io/CRbAro9ns95TrR5PYBmunS/migration_<< parameters.Workflow_ID >>)
+            # Logic for reverting the database state
+            echo $SUCCESS
+            if (( $SUCCESS == 1 ));
+            then
+              pwd
+              ls 
+              cd ~/project/backend
+              npm install
+              npm run migrations:revert
+            fi
 
   destroy-environment: #step for create destroy-environment
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
