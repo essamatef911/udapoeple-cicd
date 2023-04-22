@@ -2,7 +2,7 @@ version: 2.1
 
 
 orbs:   #steps for connect slack email and massage 
-  slack: circleci/slack@4.10.1
+  # slack: circleci/slack@4.10.1
 
 
 commands:
