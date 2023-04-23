@@ -32,9 +32,8 @@
       become: true
       raw: test -e /usr/bin/python3 || (apt -y update && apt install -y python3) #install Python if not installed
       changed_when: false
-      
-    - setup
-  
+    
+
   roles:
     - configure-server
     - configure-prometheus-node-exporter
